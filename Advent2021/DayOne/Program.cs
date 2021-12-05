@@ -1,6 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
-
+ProblemOne();
+Console.WriteLine("-----------------------------");
 ProblemTwo();
+Console.WriteLine("-----------------------------");
+Console.WriteLine("Completed Day 1");
 
 static void ProblemOne() {
     Console.WriteLine("Day 1 Problem 1");
