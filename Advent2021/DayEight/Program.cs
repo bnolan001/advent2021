@@ -70,7 +70,7 @@ static void ProblemTwo()
         numberCodes.Clear();
     }
 
-    Console.WriteLine($"");
+    Console.WriteLine($"Total {totalOutput}");
 }
 
 static int? GetNumericValue(string code)
