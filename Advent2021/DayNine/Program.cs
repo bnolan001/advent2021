@@ -8,17 +8,6 @@ Console.WriteLine("Completed Day 9");
 static void ProblemOne()
 {
     Console.WriteLine("Day 9 Problem 1");
-
-    var data = File.ReadAllLines("histogram.txt");
-    
-
-    Console.WriteLine($"");
-}
-
-static void ProblemTwo()
-{
-    Console.WriteLine("Day 9 Problem 2");
-
     var data = File.ReadAllLines("histogram.txt");
     var histogram = new List<List<int>>();
     histogram.Add(ParseLine(data[0]));
@@ -32,12 +21,13 @@ static void ProblemTwo()
         {
             histogram.Add(ParseLine(data[row + 2]));
         }
-        for(var col = 0; col < numCols; col++)
+        for (var col = 0; col < numCols; col++)
         {
 
             var val = histogram[row][col];
-            if (row > 0 
-                && val >= histogram[row - 1][col]) { 
+            if (row > 0
+                && val >= histogram[row - 1][col])
+            {
                 continue;
             }
             if (row < numRows - 1
@@ -51,7 +41,7 @@ static void ProblemTwo()
                 continue;
             }
             if (col < numCols - 1
-                && val >= histogram[row][col+1])
+                && val >= histogram[row][col + 1])
             {
                 continue;
             }
@@ -59,8 +49,17 @@ static void ProblemTwo()
         }
     }
 
-    var sum = minValues.Sum()+ minValues.Count();
+    var sum = minValues.Sum() + minValues.Count();
     Console.WriteLine($"Total min values is {sum}");
+}
+
+static void ProblemTwo()
+{
+    Console.WriteLine("Day 9 Problem 2");
+    var data = File.ReadAllLines("histogram.txt");
+
+
+    Console.WriteLine($"");
 }
 
 static List<int> ParseLine(string line)
