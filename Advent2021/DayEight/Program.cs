@@ -36,6 +36,7 @@ static void ProblemTwo()
         var input = inputOutput[0].Split(' ', StringSplitOptions.RemoveEmptyEntries);
         foreach(var code in input)
         {
+            // Sort the codes so it is easier to look them up
             var sorted = code.ToCharArray();
             Array.Sort(sorted);
             var key = String.Join("", sorted);
@@ -73,6 +74,9 @@ static void ProblemTwo()
     Console.WriteLine($"Total {totalOutput}");
 }
 
+/// <summary>
+/// Set the values that we know he value based on the number of characters in the code
+/// </summary>
 static int? GetNumericValue(string code)
 {
     int? value = null;
@@ -97,6 +101,7 @@ static int? GetNumericValue(string code)
 
 static int? GetNumericValueFromKnown(string code, Dictionary<string, int?> knownValues, int iteration)
 {
+    // Each iteration will open up a new set of digits that we can decode
     if (iteration == 0)
     {
         if (code.Length == 5)
