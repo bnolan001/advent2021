@@ -43,12 +43,13 @@ static void ProblemTwo()
             remainingTokens.Reverse();
             foreach(var token in remainingTokens)
             {
-                score += (5 * score) + Token.GetById(token.Id + 1).ClosingPoints;
+                score = (5 * score) + Token.GetById(token.Id + 1).ClosingPoints;
             }
             scores.Add(score);
             
         }
     }
+    scores.Sort();
     var middle = scores[scores.Count / 2];
     Console.WriteLine($"Final score {middle}");
 }
