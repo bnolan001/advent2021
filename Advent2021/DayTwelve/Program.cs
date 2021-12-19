@@ -1,16 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
-// See https://aka.ms/new-console-template for more information
 using DayTwelve;
 
 ProblemOne();
 Console.WriteLine("-----------------------------");
 ProblemTwo();
 Console.WriteLine("-----------------------------");
-Console.WriteLine("Completed Day 11");
+Console.WriteLine("Completed Day 12");
 
 static void ProblemOne()
 {
-    Console.WriteLine("Day 11 Problem 1");
+    Console.WriteLine("Day 12 Problem 1");
     var data = File.ReadAllLines("caves.txt");
     var allCaves = new Dictionary<string, Cave>();
     var distinctPaths = new HashSet<string>();
