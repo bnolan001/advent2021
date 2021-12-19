@@ -30,7 +30,7 @@ static void ProblemTwo()
     var visitedSmallcaves = new Dictionary<string, int>();
     BuildGraph(data, allCaves);
     var startCave = allCaves.Where(c => c.Key.Equals("start")).First().Value;
-    FindDistinctPaths(startCave, visitedSmallcaves, "", distinctPaths, 2);
+    FindDistinctPathsSingleDouble(startCave, visitedSmallcaves, "", distinctPaths);
     Console.WriteLine($"Total of {distinctPaths.Count} were found");
 }
 
@@ -99,14 +99,69 @@ static void FindDistinctPaths(Cave caveGraph, Dictionary<string, int> visitedSma
             if (!distinctPaths.Contains(completePath)) 
             { 
                 distinctPaths.Add(completePath);
-                Console.WriteLine(completePath);
+                //Console.WriteLine(completePath);
+                continue;
             }
+        }
+        else if (cave.Name.Equals("start"))
+        {
+            continue;
         }
         else if (cave.IsBig
             || (!visitedSmallCaves.ContainsKey(cave.Name) || visitedSmallCaves[cave.Name] < smallVisitPermits))
         {
             FindDistinctPaths(cave, visitedSmallCaves, path, distinctPaths, smallVisitPermits);
         }
+    }
+    if (!caveGraph.IsBig && !caveGraph.Name.Equals("start"))
+        visitedSmallCaves[caveGraph.Name]--;
+}
+
+static void FindDistinctPathsSingleDouble(Cave caveGraph, Dictionary<string, int> visitedSmallCaves, string path, HashSet<string> distinctPaths)
+{
+    path = $"{path}->{caveGraph.Name}";
+    if (!caveGraph.IsBig)
+    {
+        if (visitedSmallCaves.ContainsKey(caveGraph.Name))
+        {
+            visitedSmallCaves[caveGraph.Name]++;
+            if (visitedSmallCaves[caveGraph.Name] > 2 
+                || visitedSmallCaves.Where(v => v.Value >= 2).Count() > 2)
+            {
+                visitedSmallCaves[caveGraph.Name]--;
+                return;
+            }
+        }
+        else
+        {
+            if (caveGraph.Name.Equals("start"))
+            {
+                visitedSmallCaves.Add(caveGraph.Name, 2);
+            }
+            else
+            {
+                visitedSmallCaves.Add(caveGraph.Name, 1);
+            }
+        }
+    }
+    foreach (var cave in caveGraph.Caves.Values)
+    {
+        if (cave.Name.Equals("end"))
+        {
+            var completePath = $"{path}->{cave.Name}";
+            if (!distinctPaths.Contains(completePath))
+            {
+                distinctPaths.Add(completePath);
+                //Console.WriteLine(completePath);
+                continue;
+            }
+        }
+        else if (cave.Name.Equals("start"))
+        {
+            continue;
+        }
+        FindDistinctPathsSingleDouble(cave, visitedSmallCaves, path, distinctPaths);
+        
     }
     if (!caveGraph.IsBig && !caveGraph.Name.Equals("start"))
         visitedSmallCaves[caveGraph.Name]--;
