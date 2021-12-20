@@ -23,7 +23,15 @@ static void ProblemTwo()
     Console.WriteLine("Day 13 Problem 2");
     var data = File.ReadAllLines("numbers.txt");
     var origami = ParseData(data);
-    Console.WriteLine($"");
+    origami.CreatePaper();
+    foreach (var fold in origami.Folds)
+    {
+        origami.FoldPaper(fold);
+    }
+    var totalDots = GetTotalDots(origami);
+    PrintPaper(origami);
+    Console.WriteLine($"Total dots are {totalDots}");
+    // Not Correct:  95
 }
 
 static Origami ParseData(string[] data)
@@ -60,11 +68,10 @@ static Origami ParseData(string[] data)
 
 static void PrintPaper(Origami origami)
 {
-    //for (var row = origami.Paper.Count - 1; row >= 0; row--)
     foreach(var row in origami.Paper)
     {
-        Console.WriteLine(String.Join(" ", row));
-        //Console.WriteLine(String.Join(" ", origami.Paper[row]));
+        var output = row.Select(r => r == 0 ? 0 : 1).ToList();
+        Console.WriteLine(String.Join(" ", output));
     }
     Console.WriteLine("----------------");
 }

@@ -54,7 +54,10 @@ namespace DayThirteen
                 for (var row = 0; row < Paper.Count; row++)
                 {
                     var copyToX = foldX - (col - foldX);
-                    Paper[row][copyToX] = Paper[row][copyToX] + Paper[row][col];
+                    if (copyToX >= 0)
+                    {
+                        Paper[row][copyToX] = Paper[row][copyToX] + Paper[row][col];
+                    }
                 }
             }
         }
@@ -66,9 +69,12 @@ namespace DayThirteen
             for (var row = foldY + 1; row < Paper.Count; row++)
             {
                 var copyToY = foldY - (row - foldY);
-                for (var col = 0; col < Paper[row].Count; col++)
-                {                    
-                    Paper[copyToY][col] = Paper[copyToY][col] + Paper[row][col];
+                if (copyToY >= 0)
+                {
+                    for (var col = 0; col < Paper[row].Count; col++)
+                    {
+                        Paper[copyToY][col] = Paper[copyToY][col] + Paper[row][col];
+                    }
                 }
             }
         }
